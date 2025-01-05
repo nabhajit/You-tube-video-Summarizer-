@@ -1,0 +1,276 @@
+**Software Requirements Specification (SRS)**
+
+---
+
+### **1. Introduction**
+
+#### **1.1 Purpose**
+
+The purpose of this document is to outline the requirements for the "YouTube Transcript to Detailed Notes Converter" project. The application aims to provide users with a tool to extract transcripts from YouTube videos, generate concise summaries using natural language processing (NLP) techniques, and download detailed PDF reports. This system is designed to save users time and enhance their productivity.
+
+#### **1.2 Scope**
+
+This project is a web-based application that:
+
+- Allows users to input a YouTube video URL.
+- Extracts the transcript from the video.
+- Summarizes the transcript into bullet points or concise text.
+- Generates a downloadable PDF containing the summary and a transcript preview.
+- Provides an intuitive user interface for seamless interaction.
+
+The application will primarily cater to students, researchers, and professionals who want to quickly grasp the key points of lengthy video content.
+
+#### **1.3 Definitions, Acronyms, and Abbreviations**
+
+- **NLP**: Natural Language Processing
+- **PDF**: Portable Document Format
+- **UI**: User Interface
+- **YouTubeTranscriptApi**: API for fetching YouTube video transcripts
+- **FPDF**: Library for generating PDFs in Python
+
+#### **1.4 References**
+
+- YouTubeTranscriptApi Documentation
+- Hugging Face Transformers Documentation
+- Streamlit Documentation
+- Python Standard Library Documentation
+
+#### **1.5 Overview**
+
+This document provides detailed functional and non-functional requirements, system features, and design constraints for the "YouTube Transcript to Detailed Notes Converter."
+
+---
+
+### **2. Overall Description**
+
+#### **2.1 Product Perspective**
+
+The application will function as a standalone web-based system. It leverages NLP libraries and YouTube APIs to process video content efficiently. The product is independent but can be integrated into educational or productivity platforms in the future.
+
+#### **2.2 Product Features**
+
+- Input YouTube video URL.
+- Extract video transcript.
+- Summarize transcript text.
+- Generate and download PDF summaries.
+- View video metadata and thumbnail.
+
+#### **2.3 User Characteristics**
+
+The target users include:
+
+- **Students**: For creating notes from educational videos.
+- **Researchers**: For summarizing lengthy video presentations.
+- **Professionals**: For extracting insights from webinars and tutorials.
+
+Users are expected to have basic familiarity with web applications.
+
+#### **2.4 Constraints**
+
+- The summarization process may be constrained by the length and quality of the video transcript.
+- Reliance on YouTube APIs for transcript availability.
+- Performance dependent on the user's internet connection.
+
+#### **2.5 Assumptions and Dependencies**
+
+- Users provide valid YouTube video URLs.
+- Videos have publicly available transcripts.
+- Libraries such as NLTK, Transformers, and FPDF are installed and functioning correctly.
+
+---
+
+### **3. Functional Requirements**
+
+#### **3.1 Extract Transcript**
+
+- **Input**: YouTube video URL.
+- **Process**: Fetch the transcript using the YouTubeTranscriptApi.
+- **Output**: Display the transcript to the user.
+
+#### **3.2 Summarize Transcript**
+
+- **Input**: Transcript text.
+- **Process**: Use NLP techniques to summarize the text.
+- **Output**: Concise summary in bullet points or short paragraphs.
+
+#### **3.3 Generate PDF**
+
+- **Input**: Transcript and summary.
+- **Process**: Use FPDF to create a formatted PDF document.
+- **Output**: Downloadable PDF file.
+
+#### **3.4 Display Metadata**
+
+- **Input**: YouTube video URL.
+- **Process**: Extract metadata such as title and thumbnail.
+- **Output**: Display video title and thumbnail on the UI.
+
+---
+
+### **4. Non-Functional Requirements**
+
+#### **4.1 Performance**
+
+- The system should process videos and generate summaries within 30 seconds for typical transcripts.
+
+#### **4.2 Usability**
+
+- The UI must be intuitive, allowing users to interact seamlessly.
+
+#### **4.3 Reliability**
+
+- The system should handle invalid URLs gracefully and notify users of errors.
+
+#### **4.4 Security**
+
+- The system should securely handle video metadata and user input.
+
+#### **4.5 Scalability**
+
+- The system should handle increased user load without significant performance degradation.
+
+---
+
+### **5. System Features**
+
+#### **5.1 User Input Form**
+
+- A text field for entering YouTube video URLs.
+- Button to process the video.
+
+#### **5.2 Transcript Display**
+
+- Display the extracted transcript with a preview of the first 500 characters.
+
+#### **5.3 Summary Display**
+
+- Show the summarized content in bullet-point format.
+
+#### **5.4 PDF Download**
+
+- Provide a button to download the generated summary and transcript as a PDF.
+
+#### **5.5 Video Metadata**
+
+- Show the video title and thumbnail for better user context.
+
+---
+
+### **6. External Interface Requirements**
+
+#### **6.1 User Interfaces**
+
+- Streamlit-based interactive web interface.
+
+#### **6.2 Hardware Interfaces**
+
+- Users require a device with an internet browser.
+
+#### **6.3 Software Interfaces**
+
+- **Python Libraries**: Streamlit, YouTubeTranscriptApi, Transformers, FPDF, NLTK.
+- **External APIs**: YouTube APIs for fetching transcripts.
+
+#### **6.4 Communication Interfaces**
+
+- HTTP/HTTPS for communication with YouTube APIs.
+
+---
+
+### **7. Other Non-Functional Requirements**
+
+#### **7.1 Maintainability**
+
+- The codebase should follow modular design principles for easy updates.
+
+#### **7.2 Portability**
+
+- The application should run on major browsers (Chrome, Firefox, Safari).
+
+---
+
+### **8. Appendices**
+
+#### **8.1 References**
+
+- [YouTubeTranscriptApi Documentation](https://github.com/jdepoix/youtube-transcript-api)
+- [Hugging Face Transformers Documentation](https://huggingface.co/docs/transformers/index)
+- [FPDF Documentation](https://pyfpdf.readthedocs.io/en/latest/)
+- [ChatGPT](https://openai.com/chatgpt)
+- [Gemini](https://www.google.com/search?q=Gemini+AI)
+
+#### **8.2 Glossary**
+
+- **Summarization**: Condensing text into a shorter form while retaining essential information.
+- **Transcript**: The textual representation of spoken content in a video.
+
+---
+
+### **9. Dependencies and Libraries**
+
+Before running the application in the environment, the following dependencies and libraries must be installed:
+
+- Python 3.9 or above
+- Streamlit (`pip install streamlit`)
+- YouTubeTranscriptApi (`pip install youtube-transcript-api`)
+- Hugging Face Transformers (`pip install transformers`)
+- FPDF (`pip install fpdf`)
+- NLTK (`pip install nltk`)
+- Requests (`pip install requests`)
+
+Ensure the environment is set up correctly with all dependencies installed to avoid runtime issues.
+
+---
+
+### **Index**
+
+1. **Introduction**
+   - 1.1 Purpose
+   - 1.2 Scope
+   - 1.3 Definitions, Acronyms, and Abbreviations
+   - 1.4 References
+   - 1.5 Overview
+
+2. **Overall Description**
+   - 2.1 Product Perspective
+   - 2.2 Product Features
+   - 2.3 User Characteristics
+   - 2.4 Constraints
+   - 2.5 Assumptions and Dependencies
+
+3. **Functional Requirements**
+   - 3.1 Extract Transcript
+   - 3.2 Summarize Transcript
+   - 3.3 Generate PDF
+   - 3.4 Display Metadata
+
+4. **Non-Functional Requirements**
+   - 4.1 Performance
+   - 4.2 Usability
+   - 4.3 Reliability
+   - 4.4 Security
+   - 4.5 Scalability
+
+5. **System Features**
+   - 5.1 User Input Form
+   - 5.2 Transcript Display
+   - 5.3 Summary Display
+   - 5.4 PDF Download
+   - 5.5 Video Metadata
+
+6. **External Interface Requirements**
+   - 6.1 User Interfaces
+   - 6.2 Hardware Interfaces
+   - 6.3 Software Interfaces
+   - 6.4 Communication Interfaces
+
+7. **Other Non-Functional Requirements**
+   - 7.1 Maintainability
+   - 7.2 Portability
+
+8. **Appendices**
+   - 8.1 References
+   - 8.2 Glossary
+
+9. **Dependencies and Libraries**
+
