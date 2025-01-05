@@ -250,18 +250,44 @@ def generate_summary(transcript_text):
         
         # Summarize each chunk with shorter output
         summaries = []
-        for chunk in chunks[:2]:  # Process only first 2 chunks for speed
+        for chunk in chunks[:6]:  # Process first 6 chunks for more comprehensive summary
             summary = summarizer(
                 chunk,
-                max_length=60,  # Shorter summaries
-                min_length=20,
+                max_length=100,  # Increased max length for more detail
+                min_length=30,
                 do_sample=False,
                 truncation=True
             )
             summaries.append(summary[0]['summary_text'])
         
-        # Format as bullet points
-        summary_points = [f"- {text.strip()}" for text in summaries if text.strip()]
+        # Extract key sentences from transcript
+        sentences = sent_tokenize(transcript_text)
+        
+        # Get important sentences from different parts of the transcript
+        important_positions = []
+        if len(sentences) >= 1:
+            important_positions.append(sentences[0])  # First sentence
+        if len(sentences) >= 3:
+            important_positions.append(sentences[len(sentences)//3])  # One-third point
+        if len(sentences) >= 2:
+            important_positions.append(sentences[len(sentences)//2])  # Middle point
+        if len(sentences) >= 4:
+            important_positions.append(sentences[len(sentences)*2//3])  # Two-thirds point
+        if len(sentences) >= 2:
+            important_positions.append(sentences[-1])  # Last sentence
+            
+        # Format all points
+        summary_points = []
+        
+        # Add main summary points with section header
+        summary_points.append("Main Summary:")
+        summary_points.extend([f"- {text.strip()}" for text in summaries if text.strip()])
+        
+        # Add key points from transcript
+        summary_points.append("\nKey Points from Transcript:")
+        summary_points.extend([f"- {sent.strip()}" for sent in important_positions if sent.strip()])
+        
+        # Join all points with proper spacing
         summary = '\n\n'.join(summary_points)
         
         return summary
@@ -271,11 +297,15 @@ def generate_summary(transcript_text):
         # Fallback to simple extractive summarization if transformer fails
         try:
             sentences = sent_tokenize(transcript_text)
-            # Get first and last sentences as a basic summary
-            if len(sentences) >= 2:
+            # Get more sentences for the fallback summary
+            if len(sentences) >= 6:
                 summary_points = [
-                    f"- {sentences[0].strip()}",
-                    f"- {sentences[-1].strip()}"
+                    "Main Points:",
+                    f"- {sentences[0].strip()}",  # Introduction
+                    f"- {sentences[len(sentences)//4].strip()}",  # Quarter point
+                    f"- {sentences[len(sentences)//2].strip()}",  # Middle point
+                    f"- {sentences[len(sentences)*3//4].strip()}",  # Three-quarter point
+                    f"- {sentences[-1].strip()}"  # Conclusion
                 ]
                 return '\n\n'.join(summary_points)
         except:
